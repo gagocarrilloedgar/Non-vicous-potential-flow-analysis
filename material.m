@@ -1,7 +1,7 @@
 
 
 
-function [mat] = material(nodes,geo)
+function [mat] = material(nodes,geo,c,airfoil,index)
 
 r = geo.r;
 h = geo.h;
@@ -20,7 +20,12 @@ M = Y - 2;
 a = nodes.nx(floor(X/2) + 1);
 b = nodes.ny(floor(Y/2) + 1);
 
-selection = 1;
+
+% Airfoil
+selection = 2;
+init = (geo.L -c)/2;
+
+[x,y] = meshgrid(nodes.nx,nodes.ny);
 
 
 for i = 2:N+1
@@ -42,12 +47,23 @@ for i = 2:N+1
                 end
                 
             case 2
-                
-                
-                
-                
+                if(i>= index(1) && i<= index(end))
+                    
+                    if x(j,i)>=airfoil.xu(i-index(1)+1) && y(j,i) <= airfoil.yu(i-index(1)+1)
+                        if y(j,i) >= airfoil.yl(i-index(1)+1)
+                            mat(j,i)=1;
+                        end
+                    end
+                    
+                    if(x(j,i)> init + c*3/4)
+                        if x(j,i) <= airfoil.xu(i-index(1)+1) && y(j,i) <= airfoil.yu(i-index(1)+1)
+                            if y(j,i) >= airfoil.yl(i-index(1)+1)
+                                mat(j,i)=1;
+                            end
+                        end
+                    end
+                end
         end
-        
         
     end
 end

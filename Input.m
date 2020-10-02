@@ -4,7 +4,7 @@
 
 %% Domain
 % Domain Length
-domainP=[0  3; 0 1];        %First  row for X dim
+domainP=[0  9; 0 3];        %First  row for X dim
                             %Second row for Y dim                           
 
 
@@ -17,9 +17,9 @@ domainP=[0  3; 0 1];        %First  row for X dim
 
 L   = domainP(1,2)-domainP(1,1); % [m] x direction
 H   = domainP(2,2)-domainP(2,1); % [m] y direction
-M  =  30;
+M  =  20;
 N  = M*L;  %Uniform CV
-r = 0.25; %[m] This is the radius of the inner circle
+r = 0.35; %[m] This is the radius of the inner circle
 h = r; %[m] Minor axis of the ellipse
 k = 2*h; %[m] MAjor axis of the ellipse
 
@@ -42,7 +42,6 @@ R   = 287;
 % Suposing ideal diatomic gas
 cp   = (5/2)*R;
 gamma = 1.394;
-
 flow = struct("R",R,"cp",cp,"gamma",gamma);
 
 %% Reference Values %%
@@ -55,14 +54,18 @@ flow = struct("R",R,"cp",cp,"gamma",gamma);
 
 p0   = 10000;
 T0   = 273+27;
-v0   = 10;
+v0   = 100;
 rho0 = p0/(R*T0);
 istream = (v0*H)/2;
 
 flow = struct("R",R,"cp",cp,"gamma",gamma,"p0",p0,"T0",T0,"v0",v0,...
 "rho0",rho0,"istream",istream);
 
-%AirfoilCordinates;
+%% Airfoil info
+
+c = 3;         %[m] Airfoil chord
+NACA = 2315;   % NACA airfoil definition
+
 
 
 

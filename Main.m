@@ -14,11 +14,14 @@ Input;
 %% Geometry
 [nodes] = ComputeVectors(domainP, mesh);
 
+%% Airfoil Gemetry generation 
+[airfoil,index] = AirfoilCordinates(c,NACA,geometry,nodes);
+
 %% Initialization
 [stream,p,T,rho,v] = Initialization(flow,nodes);
 
 %% Material
-[mat] = material(nodes,geometry);
+[mat] = material(nodes,geometry,c,airfoil,index);
 
 %% Obstacle Initialization
 [stream,rho,v,p,T] = ObstacleInit(flow,nodes,mat,v,rho,stream,p,T);
