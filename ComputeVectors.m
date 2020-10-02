@@ -2,24 +2,20 @@
 %% ComputeVectors %%
 
 
-function [xn,xf,yn,yf] = ComputeVectors(domainP, meshSizes)
+function [nodes] = ComputeVectors(domainP, meshSizes)
 
-xLength = domainP([1],[2])-domainP([1],[1]);  
-yLength = domainP([2],[2])-domainP([2],[1]);                              
-domainLengths=[xLength, yLength]; 
+xLength = domainP(1,2)-domainP(1,1);  
+yLength = domainP(2,2)-domainP(2,1);  
 
-dim=1;
-[xn,xf]=facesZVB(domainLengths(dim),...
-          meshSizes(dim),domainP([dim],[1]));
+[nx,fx]=mesh(xLength,meshSizes(1),domainP(1,1));
 
-dim=2;
-[yn,yf]=facesZVB(domainLengths(dim),...
-  meshSizes(dim),domainP([dim],[1]));
+[ny,fy]=mesh(yLength,meshSizes(2),domainP(2,1));
 
+nodes = struct("nx", nx,"ny",ny, "fx",fx, "fy",fy);
 
 end
 
-function [nx,fx]=facesZVB(length,numCV,initPoint)
+function [nx,fx]=mesh(length,numCV,initPoint)
 
 fx=linspace(initPoint,initPoint+length,numCV+1);
 

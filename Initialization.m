@@ -1,9 +1,9 @@
 
 
-function [stream,p,T,rho,v] = Initialization(init, nodeX,nodeY)
+function [stream,p,T,rho,v] = Initialization(flow,nodes)
 
-X = numel(nodeX);
-Y = numel(nodeY);
+X = numel(nodes.nx);
+Y = numel(nodes.ny);
 
 stream = zeros(Y,X);
 p      = zeros(Y,X);
@@ -11,10 +11,10 @@ T      = zeros(Y,X);
 rho    = zeros(Y,X);
 
 % Initiazation of the whole matrix
-stream(:,:) = init.istream;
-p(:,:)      = init.p0;
-T(:,:)      = init.T0;
-rho(:,:)    = init.rho0;
+stream(:,:) = flow.istream;
+p(:,:)      = flow.p0;
+T(:,:)      = flow.T0;
+rho(:,:)    = flow.rho0;
 
     
 
@@ -26,9 +26,8 @@ v.vxn    = zeros(Y-1,X-1);
 v.vye    = zeros(Y-1,X-1); 
 
 % Velocity Field
-v.vp(:,:)     = init.v0;
-v.vxn(:,:)    = init.v0;
-%vye = 0 we are not taking into account the vertical velocity
+v.vp(:,:)     = flow.v0;
+v.vxn(:,:)    = flow.v0;
 
 
 

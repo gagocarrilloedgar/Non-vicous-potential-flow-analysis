@@ -5,58 +5,45 @@
 %% Domain
 % Domain Length
 domainP=[0  3; 0 1];        %First  row for X dim
-                            %Second row for Y dim  
-                            
-L   = domainP(1,2)-domainP(1,1); % [m] x direction
-H   = domainP(2,2)-domainP(2,1); % [m] y direction
+                            %Second row for Y dim                           
 
-%%  Circumference or Cilinder
-% rmax   = 
-% rmin   = Minimum Radius
-% Rsect  = Number of divisions
-% visual = R to display
-%
-% Set Rsect as 1 and the code takes the minimum radius as the study radius
-r.rmax   =  H / 2.354;      % Maximum Radius [m]
-r.rmin   =  H / 10;         % Minimum Radius [m]
-r.Rsect  =  20;             % Number of division [m]
-r.visual =  5;    % R to dispaly
 
-if r.Rsect ==1
-    r.radi = r.rmin;
-else
-    r.radi = linspace(r.rmin,r.rmax,r.Rsect);
-end
-                         
 
 %% Mesh
 % N  = Nodes X
 % M  = Nodes Y 
 % H  = Domain Heigth - Y
 % L  = Domain Length - X
-% for computing the boundaries
-M  =  20;
+
+L   = domainP(1,2)-domainP(1,1); % [m] x direction
+H   = domainP(2,2)-domainP(2,1); % [m] y direction
+M  =  30;
 N  = M*L;  %Uniform CV
+r = 0.25; %[m] This is the radius of the inner circle
+h = r; %[m] Minor axis of the ellipse
+k = 2*h; %[m] MAjor axis of the ellipse
 
-meshSizes=[N M];
+mesh=[N M];
 
+geometry = struct("L",L,"H",H,"M",M,"N",N,"r",r,"h",h,"k",k);
 
 %% Iterative solver parameters
 % maxIter   =   Maximum number of iterations
 % sigma     =   Error Parameter
 
-maxIter=1e4;
-sigma=1e-6;
+delta=1e-6;
 
 %% Phisical Constants
 %  Fluid -> Air at 300K
 %  R     =   Gas Constant [J/kgK]
 
-fluidC.R   = 287;
+R   = 287;
 
 % Suposing ideal diatomic gas
-fluidC.cp   = (5/2)*fluidC.R;
-fluidC.gam = 1.394;
+cp   = (5/2)*R;
+gamma = 1.394;
+
+flow = struct("R",R,"cp",cp,"gamma",gamma);
 
 %% Reference Values %%
 % rho   =   Density [kg/m^3]
@@ -66,14 +53,18 @@ fluidC.gam = 1.394;
 % R     =   GasConstant [kJ/kmolK]
 % cp    =   Coefficent of pressure [Ws/kg K]   
 
-init.p0   = 100000;
-init.T0   = 273+27;
-init.v0   = 4;
-init.rho0 = init.p0/(fluidC.R*init.T0);
-init.istream = (init.v0*H)/2;
+p0   = 10000;
+T0   = 273+27;
+v0   = 10;
+rho0 = p0/(R*T0);
+istream = (v0*H)/2;
 
-%%
-D=1.5; %[m] This is the diamter of the inner circle
+flow = struct("R",R,"cp",cp,"gamma",gamma,"p0",p0,"T0",T0,"v0",v0,...
+"rho0",rho0,"istream",istream);
+
+%AirfoilCordinates;
+
+
 
 
 

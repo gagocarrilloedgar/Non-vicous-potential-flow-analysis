@@ -12,24 +12,26 @@ clc;
 Input;
 
 %% Geometry
-[nodeX,faceX,nodeY,faceY] = ComputeVectors(domainP, meshSizes);
+[nodes] = ComputeVectors(domainP, mesh);
 
 %% Initialization
-[stream,p,T,rho,v] = Initialization(init, nodeX,nodeY);
+[stream,p,T,rho,v] = Initialization(flow,nodes);
 
 %% Material
-[mat] = material(nodeX,nodeY,D/2);
+[mat] = material(nodes,geometry);
 
 %% Obstacle Initialization
-[stream,rho,v,p,T] = ObstacleInit(init, nodeX,nodeY,mat,v,rho,stream,p,T);
+[stream,rho,v,p,T] = ObstacleInit(flow,nodes,mat,v,rho,stream,p,T);
 
 %% Compute Inner Coefficients
-[coeff] = ComputeInnerCoeff(rho,nodeX,faceX,nodeY,faceY,init,mat);
+[coeff,rho_frac] = ComputeInnerCoeff(rho,nodes,flow,mat);
 
 %% Compute Boundary
-[stream,coeff,v] = ComputeBoundary(stream,init,H,nodeY,meshSizes,coeff,v);
+[stream,coeff,v] = ComputeBoundary(stream,flow,H,nodes.ny,mesh,coeff,v);
 
 %% Solver
-[stream,p,T,rho,v] = Solver(stream,coeff,nodeX,nodeY,sigma,meshSizes,p,T,rho,init,fluidC,v,mat);
+[stream,p,T,rho,v] = Solver(stream,coeff,nodes,delta,mesh,p,T,rho,flow,v,mat,rho_frac);
 
+%% Plots 
+PlotGraph(stream,p,T,rho,v,nodes,mat,geometry);
 

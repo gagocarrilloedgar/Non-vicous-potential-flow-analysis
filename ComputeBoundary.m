@@ -19,25 +19,25 @@ function [stream,coeff,v] = ComputeBoundary(stream,init,H,nodeY,meshSizes,coeff,
     
     %% Bottom
     stream(1,:)   = 0;
-    coeff.ap(1,:)     = 1;
+    coeff.ap(1,:)     = 0;
     coeff.aw(1,:)     = 0;
     coeff.ae(1,:)     = 0;    
     coeff.an(1,:)     = 0;
     coeff.as(1,:)     = 0;
-    coeff.bp(1,:)     = init.v0*H;
+    coeff.bp(1,:)     = 0;
     
     %No slip BC
     v.vp(1,:)           = 0;   
     v.vxn(1,:)          = 0;
    
     %% Inlet
-    stream(:,1) = init.v0*nodeY(:);
+    stream(:,1) = init.v0*nodeY;
     coeff.ap(:,1)     = 1;
     coeff.ae(:,1)     = 0;
     coeff.aw(:,1)     = 0;
     coeff.an(:,1)     = 0;
     coeff.as(:,1)     = 0;
-    coeff.bp(:,1)     = 0;
+    coeff.bp(:,1)     = init.v0*H;
     
     %% Outlet
     % Stream not defined because it is already set when initiaizing field
@@ -46,7 +46,6 @@ function [stream,coeff,v] = ComputeBoundary(stream,init,H,nodeY,meshSizes,coeff,
     coeff.ae(:,N+2)     = 0;
     coeff.an(:,N+2)     = 0;
     coeff.as(:,N+2)     = 0;
-    coeff.bp(:,N+2)     = init.v0*nodeY(:);
-    
+    coeff.bp(:,N+2)     = 0;
   
 end
