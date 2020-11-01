@@ -22,7 +22,7 @@ b = nodes.ny(floor(Y/2) + 1);
 
 
 % Airfoil
-selection = 2;
+selection = 0;
 init = (geo.L -c)/2;
 
 [x,y] = meshgrid(nodes.nx,nodes.ny);

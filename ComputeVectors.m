@@ -1,7 +1,6 @@
 
 %% ComputeVectors %%
 
-
 function [nodes] = ComputeVectors(domainP, meshSizes)
 
 xLength = domainP(1,2)-domainP(1,1);  
@@ -15,7 +14,7 @@ nodes = struct("nx", nx,"ny",ny, "fx",fx, "fy",fy);
 
 end
 
-function [nx,fx]=mesh(length,numCV,initPoint)
+function [nx,fx]=NodesFaces(length,numCV,initPoint)
 
 fx=linspace(initPoint,initPoint+length,numCV+1);
 
