@@ -1,6 +1,37 @@
+%% Potential flows
+% Author:Gago, Edgar
+% Date 15/10/2020
+% Subject: Computational engineering
+%
+%% ObstacleInit
+% Description
+% Applying obstacle selector to the physical properties of the problem
+%
+% Inputs
+% nodes: struct containing x & y distribution
+% mat: matrix with the nodes dsitrbution where there's flow or solid
+% v: initial velocitiy matrix
+% stream: initial stream lines matrix
+% rho: initial densities matrix 
+% rho_frac: struct with the different rho's distributions of the cv's
+% T: initial temperatures matrix 
+% p: initial pressures matrix 
+% coeff: matrix conataining the inner coefficients
+% delta: minimum admisible error
+% flow: strtuc with the physical flow properties
+%
+% Ouputs
+% v: final velocitiy matrix
+% streamp: final stream lines matrix
+% rho: final densities matrix 
+% T: final temperatures matrix 
+% p: final pressures matrix 
+% it: number of iterations until converged
+%
+%% CODE
 
-
-function [streamp,p,T,rho,v] = Solver(stream,coeff,nodes,delta,mesh,p,T,rho,flow,v,mat,rho_frac)
+function [streamp,p,T,rho,v,it] = Solver(stream,coeff,nodes,delta,mesh,p,T...
+    ,rho,flow,v,mat,rho_frac)
 
 
 N = mesh(1);
@@ -8,7 +39,7 @@ M = mesh(2);
 streamp = stream;
 
 e = 1;
-
+it = 1;
 
 while e>delta
     
@@ -33,6 +64,7 @@ while e>delta
     err = abs(streamp - stream);
     e =  max(max(err));
     stream = streamp;
+    it = it + 1;
     
 end
 

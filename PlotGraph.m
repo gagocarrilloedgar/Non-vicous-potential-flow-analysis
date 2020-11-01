@@ -1,3 +1,28 @@
+%% Potential flows
+% Author:Gago, Edgar
+% Date 15/10/2020
+% Subject: Computational engineering
+%
+%% ObstacleInit
+% Description
+% Applying obstacle selector to the physical properties of the problem
+%
+% Inputs
+% geometry: struct containing the geometry information
+% nodes: struct containing x & y distribution
+% v: final velocitiy matrix
+% stream: final stream lines matrix
+% rho: final densities matrix 
+% T: final temperatures matrix 
+% p: final pressures matrix 
+% mat: matrix with the nodes dsitrbution where there's flow or solid
+%
+%
+% Ouputs
+%
+%% CODE
+
+
 function  PlotGraph(stream,p,T,rho,v,nodes,mat,geometry)
 
 M = geometry.M;
@@ -159,9 +184,6 @@ x = sprintf('Nodes X  = %d      L  =  %d  [m]',N,L);
 y = sprintf('NodesY  = %d       H  =  %d  [m]',M,H); 
 xlabel(x), ylabel(y);
 set(gcf, 'Position',  [100, 100, L*500, H*500]);
-
-
-
 
 
 end

@@ -1,7 +1,28 @@
+%% Potential flows
+% Author:Gago, Edgar
+% Date 15/10/2020
+% Subject: Computational engineering
+%
+%% material
+% Description
+% Material selector generator
+%
+% Inputs
+% c: chord [m]
+% geo: struct containing the geometry information
+% nodes: struct containing x & y distribution
+% airfoil: struct containing upper and lower distrubution of the airfoil
+% index: vector whith index that conatain the starting point fo the mesh
+% distribution
+% ops: geometry selector
+%
+% Ouputs
+% mat: matrix with the nodes dsitrbution where there's flow or solid
+%
+%% CODE
 
 
-
-function [mat] = material(nodes,geo,c,airfoil,index)
+function [mat] = material(nodes,geo,c,airfoil,index,ops)
 
 r = geo.r;
 h = geo.h;
@@ -22,7 +43,7 @@ b = nodes.ny(floor(Y/2) + 1);
 
 
 % Airfoil
-selection = 0;
+selection = ops;
 init = (geo.L -c)/2;
 
 [x,y] = meshgrid(nodes.nx,nodes.ny);
@@ -70,4 +91,3 @@ end
 
 
 end
-

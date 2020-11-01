@@ -1,4 +1,24 @@
-
+%% Potential flows
+% Author:Gago, Edgar
+% Date 15/10/2020
+% Subject: Computational engineering
+%
+%% AirfoilCordinates
+% Description
+% Generation of the airfoil acoording to the NACA-4 series
+%
+% Inputs
+% c: chord [m]
+% NACA: string containing the selected profiles
+% geo: struct containing the geometry information
+% nodes: struct containing x & y distribution
+%
+% Ouputs
+% airfoil: struct containing upper and lower distrubution of the airfoil
+% index: vector whith index that conatain the starting point fo the mesh
+% distribution
+%
+%% CODE
 
 function [airfoil,index] = AirfoilCordinates(c,NACA,geo,nodes)
 
@@ -21,13 +41,13 @@ for i=1:size(nodes.nx,2)
         index(i)=i;
     end
 end
+
 index = index(index~=0);
 
 x=linspace(0, c, index(end));
 
-%thicness distribution;
-yt = 5*t*c*(.2969*(sqrt(x/c))+-.1260*(x/c)+-.3516*(x/c).^2+.2843*(x/c).^3+-.1015*(x/c).^4);
-
+% Thicness distribution;
+yt = ComputeThickness(t,c,x);
 
 for k = 1:length(x)
     if x(k) <= p*c
@@ -50,47 +70,6 @@ xu = xu + init;
 yu = yu + inity;
 xl = xl + init;
 yl = yl + inity;
-
-
-[x,y] = meshgrid(nodes.nx,nodes.ny);
-
-% figure(1);
-% % %plot of airfoil
-% plot(xu,yu,'*b')
-% hold on
-% plot(xl,yl,'*b')
-% plot(x,y,'*r');
-% % %plot(x,yc,'g')
-
-
-%axis equal;
-
-% X = numel(nodes.nx); % returns the numer of elemets in the array NodeX
-% Y = numel(nodes.ny);
-% 
-% mat = zeros(Y,X);
-% 
-% N = X - 2;
-% M = Y - 2;
-% 
-% 
-% for i = index(1):index(end)
-%     for j = 2:M+1
-%         if x(j,i)>=xu(i-index(1)+1) && y(j,i) <= yu(i-index(1)+1)
-%             if y(j,i) >= yl(i-index(1)+1)
-%                 mat(j,i)=1;
-%             end
-%         end
-%         
-%         if(x(j,i)> init + c*3/4)
-%             if x(j,i) <= xu(i-index(1)+1) && y(j,i) <= yu(i-index(1)+1)
-%                 if y(j,i) >= yl(i-index(1)+1)
-%                     mat(j,i)=1;
-%                 end
-%             end
-%         end
-%     end
-% end
 
 
 airfoil = struct("xu",xu,"yu",yu,"xl",xl,"yl",yl);

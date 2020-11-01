@@ -1,8 +1,27 @@
+%% Potential flows
+% Author:Gago, Edgar
+% Date 15/10/2020
+% Subject: Computational engineering
+%
+%% ComputeInnerCoeff
+% Description
+% Computes the inner coefficients of the case study
+%
+% Inputs
+% nodes: struct with the different vectors distributions of the problem
+% mat: contains the logic selector determine whether it is flow or an
+% obbject
+% flow: strtuc with the physical flow properties
+% rho: densitty matrix 
+%
+% Ouputs
+% v: velocities matrix with the corrected boundary conditions
+% coeff: matrix with the computed inner coefficients
+% rho_frac: struct with the different rho distribution of the cv's
+
+%% CODE
 
 function [coeff,rho_frac] = ComputeInnerCoeff(rho,nodes,flow,mat)
-
-
-
 nx = nodes.nx;
 ny = nodes.ny;
 fx = nodes.fx;

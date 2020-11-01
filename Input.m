@@ -1,6 +1,12 @@
 
-%% Input Data %%
-
+%% Potential flows
+% Author:Gago, Edgar
+% Date 15/10/2020
+% Subject: Computational engineering
+%
+% Inputs
+% Description
+% Problems inputs and constants definition
 
 %% Domaingeometry
 % Domain Length
@@ -15,15 +21,13 @@ domainP=[0  3; 0 1];        %First  row for X dim
 
 L   = domainP(1,2)-domainP(1,1); % [m] x direction
 H   = domainP(2,2)-domainP(2,1); % [m] y direction
-M  =  100;
+M  =  linspace(10,100,10);
 N  = M*L;  %Uniform CV
 r = 0.25; %[m] This is the radius of the inner circle
 h = r; %[m] Minor axis of the ellipse
 k = 2*h; %[m] MAjor axis of the ellipse
 
-mesh=[N M];
 
-geometry = struct("L",L,"H",H,"M",M,"N",N,"r",r,"h",h,"k",k);
 
 %% Iterative solver parameters
 % maxIter   =   Maximum number of iterations
@@ -34,13 +38,10 @@ delta=1e-6;
 %% Phisical Constants
 %  Fluid -> Air at 300K
 %  R     =   Gas Constant [J/kgK]
-
 R   = 287;
-
 % Suposing ideal diatomic gas
 cp   = (5/2)*R;
 gamma = 1.394;
-flow = struct("R",R,"cp",cp,"gamma",gamma);
 
 %% Reference Values %%
 % rho   =   Density [kg/m^3]
@@ -60,10 +61,12 @@ flow = struct("R",R,"cp",cp,"gamma",gamma,"p0",p0,"T0",T0,"v0",v0,...
 "rho0",rho0,"istream",istream);
 
 %% Airfoil info
-
 c = 3.8;         %[m] Airfoil chord
 NACA = 2215;   % NACA airfoil definition
 
+ops = 0; % 0 --> cylinder
+         % 1 --> elipse
+         % 2 --> airfoil
 
 
 

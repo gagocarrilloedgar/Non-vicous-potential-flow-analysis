@@ -1,4 +1,25 @@
-
+%% Potential flows
+% Author:Gago, Edgar
+% Date 15/10/2020
+% Subject: Computational engineering
+%
+%% Initialization
+% Description
+% Physical properties vectors initialization
+%
+% Inputs
+% flow: strtuc with the physical flow properties
+% nodes: struct with the different vectors distributions of the problem
+% 
+%
+% Ouputs
+% v: initialized velocitiy matrix
+% stream: initialized matrix with the stream lines
+% rho: initialized densities matrix 
+% T: initialized temperatures matrix 
+% p: initialized pressures matrix 
+%
+%% CODE
 
 function [stream,p,T,rho,v] = Initialization(flow,nodes)
 

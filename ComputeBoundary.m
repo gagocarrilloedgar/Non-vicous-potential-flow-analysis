@@ -1,4 +1,28 @@
+%% Potential flows
+% Author:Gago, Edgar
+% Date 15/10/2020
+% Subject: Computational engineering
+%
+%% ComputeBoundary
+% Description
+% Generation of the airfoil acoording to the NACA-4 series
+%
+% Inputs
+% strem: matrix with the stream lines values
+% H: height of the CV
+% nodey: distribution of nodes on the y direction
+% meshSizes: struct containing the sizes of the final mesh
+% init: strutu with the initial/boundary values 
+% coef: matrix with the coefficient values
+% v: velocities matrix
+%
+% Ouputs
+% v: velocities matrix with the corrected boundary conditions
+% coef: matrix with the coefficient with the corrected boundary conditions
+% strem: matrix with the stream lines with the corrected boundary 
+%        conditions
 
+%% CODE
 function [stream,coeff,v] = ComputeBoundary(stream,init,H,nodeY,meshSizes,coeff,v)
 
     N = meshSizes(1);

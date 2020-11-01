@@ -1,3 +1,31 @@
+%% Potential flows
+% Author:Gago, Edgar
+% Date 15/10/2020
+% Subject: Computational engineering
+%
+%% ObstacleInit
+% Description
+% Applying obstacle selector to the physical properties of the problem
+%
+% Inputs
+% flow: strtuc with the physical flow properties
+% nodes: struct containing x & y distribution
+% v: velocitiy matrix
+% stream: stream lines matrix
+% rho: densities matrix 
+% T: temperatures matrix 
+% p: pressures matrix 
+% mat: matrix with the nodes dsitrbution where there's flow or solid
+
+%
+% Ouputs
+% v: updated velocitiy matrix
+% stream: updated matrix with the stream lines
+% rho: updated densities matrix 
+% T: updated temperatures matrix 
+% p: updated pressures matrix 
+%
+%% CODE
 
 function [stream,rho,v,p,T] = ObstacleInit(flow,nodes,mat,v,rho,stream,p,T)
 X = numel(nodes.nx);
