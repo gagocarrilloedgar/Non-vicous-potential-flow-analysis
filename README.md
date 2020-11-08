@@ -10,6 +10,20 @@ The code structure is described in the following image:
 
 Some of the results you should get when runing the code are:
 
+![Computational cost vs the discretization size](./Figures/compu_cost.png)
+
+![Stream lines of an airfoil profile](./Figures/2315_stream.png)
+
+![Isobars of the flow around a cylinder](./Figures/c_isobars.png)
+
+## Code report 
+
+---
+*Abstract* |  This report is aimed to provide the reader with a first approach to the computational fluid dynamics simulations field focusing on potential flows. In this report the analysis of three use cases will be analysed and the code structure and a brief theoretical analysis of the problems will be done.
+---
+
+The report can be found here in the following link
+
 
 
 
