@@ -5,7 +5,7 @@ in order to obtain a valid result for certain cituation where the visocity is no
 
 The code structure is described in the following image:
 
-![image info](./pictures/image.png)
+![Code stucture](./Figures/potential.png)
 
 
 Some of the results you should get when runing the code are:
