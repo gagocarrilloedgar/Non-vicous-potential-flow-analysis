@@ -12,9 +12,8 @@ Some of the results you should get when runing the code are:
 
 ![Computational cost vs the discretization size](./Figures/compu_cost.png)
 
-![Stream lines of an airfoil profile](./Figures/2315_stream.jpg)
 
-![Isobars of the flow around a cylinder](./Figures/c_isobars.jpg)
+![Isobars an airfoil (N2315) ](./Figures/2315_isobars.jpg)  | ![Stream lines of the flow around a cylinder](./Figures/c_strem.jpg)
 
 ## Code report 
 
